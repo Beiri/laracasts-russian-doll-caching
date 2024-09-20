@@ -19,3 +19,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Card::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+    ];
+});
+
+$factory->define(App\Note::class, function (Faker\Generator $faker) {
+    return [
+        'card_id' => factory('App\Card')->create()->id,
+        'user_id' => factory('App\User')->create()->id,
+        'body' => $faker->paragraph,
+    ];
+});
